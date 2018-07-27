@@ -100,7 +100,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/.cargo/bin:$PATH"
 alias vim=nvim
 alias vi=nvim
-alias ulogout="sudo pkill -KILL -u $1"
 alias logout="sudo pkill -u ${USER}"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
