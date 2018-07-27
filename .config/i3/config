@@ -11,7 +11,7 @@ floating_modifier $mod
 bindsym $mod+Return exec $term
 bindsym $mod+space exec "rofi -matching fuzzy -show run"
 bindsym $mod+p exec $term -e ranger
-bindsym $mod+F8 exec $term -e ranger ~/media/HDD2/
+#bindsym $mod+F8 exec $term -e ranger ~/media/HDD2/
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -46,10 +46,10 @@ bindsym $mod+Control+Right move right
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-bindsym $mod+t split toggle
+#bindsym $mod+b layout stacking
+#bindsym $mod+n layout tabbed
+#bindsym $mod+v layout toggle split
+#bindsym $mod+t split toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+a floating toggle
@@ -58,12 +58,40 @@ bindsym $mod+Shift+a floating toggle
 bindsym $mod+a focus mode_toggle
 
 # Init Spotify and always show in center
-bindsym $mod+m			[class="Spotify"] scratchpad show; [class="Spotify"] move position center
-for_window [class="Spotify"] floating enable
-for_window [class="Spotify"] resize set 1280 720
-for_window [class="Spotify"] move scratchpad
-for_window [class="Spotify"] border pixel 5
-exec --no-startup-id spotify 
+# Não ta funcionando no desktop (spotify erro)
+#bindsym $mod+m			[class="Spotify"] scratchpad show; [class="Spotify"] move position center
+#for_window [class="Spotify"] floating enable
+#for_window [class="Spotify"] resize set 1280 720
+#for_window [class="Spotify"] move scratchpad
+#for_window [class="Spotify"] border pixel 5
+#exec --no-startup-id spotify 
+
+# Init Tusk and always show in center
+bindsym $mod+t			[class="Tusk"] scratchpad show; [class="Tusk"] move position center
+for_window [class="Tusk"] floating enable
+for_window [class="Tusk"] resize set 1280 720
+for_window [class="Tusk"] move scratchpad
+for_window [class="Tusk"] border pixel 5
+exec_always --no-startup-id "snap run tusk"
+
+
+# Init Spotify and always show in center
+bindsym $mod+w			[class="Zenkit"] scratchpad show; [class="Zenkit"] move position center
+for_window [class="Zenkit"] floating enable
+for_window [class="Zenkit"] resize set 1280 720
+for_window [class="Zenkit"] move scratchpad
+for_window [class="Zenkit"] border pixel 5
+exec_always --no-startup-id "snap run zenkit"
+
+# Init Spotify and always show in center
+bindsym $mod+F9			[class="Bitwarden"] scratchpad show; [class="Bitwarden"] move position center
+for_window [class="Bitwarden"] floating enable
+for_window [class="Bitwarden"] resize set 1280 720
+for_window [class="Bitwarden"] move scratchpad
+for_window [class="Bitwarden"] border pixel 5
+exec_always --no-startup-id "snap run bitwarden"
+
+
 
 #VLC always in center
 

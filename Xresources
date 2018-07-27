@@ -48,7 +48,7 @@ URxvt.letterSpace: 0
 URxvt.scrollBar: false
 ! Scripts
 URxvt.perl-lib: $HOME/.urxvt/ext/
-URxvt.perl-ext-common: keyboard-select, url-select, resize-font
+URxvt.perl-ext-common: keyboard-select, url-select, font-size
 ! keyboard-select
 URxvt.keysym.M-f: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
@@ -56,8 +56,10 @@ URxvt.keyboard-select.clipboard: true
 !url-select
 URxvt.keysym.M-u: perl:url-select:select_next
 
-
-URxvt.keysym.M-C-j:     resize-font:smaller
-URxvt.keysym.M-C-k:      resize-font:bigger
-URxvt.keysym.M-C-equal:     resize-font:reset
-URxvt.keysym.M-C-question:  resize-font:show
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+URxvt.keysym.C-equal:  perl:font-size:reset
+URxvt.keysym.C-slash:  perl:font-size:show
+URxvt.font-size.step: 4
