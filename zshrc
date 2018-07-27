@@ -98,8 +98,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User specific aliases and functions
 export PATH="$HOME/.cargo/bin:$PATH"
-#Usar ln -sf ~/.alacritty.yml ~/.config/alacritty/alacritty.yml
-alias alacritty="env WAYLAND_DISPLAY= alacritty"
 alias vim=nvim
 alias vi=nvim
 alias ulogout="sudo pkill -KILL -u $1"

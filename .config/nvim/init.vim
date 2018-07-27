@@ -1,5 +1,4 @@
 set shell=/bin/bash
-"let mapleader = "\<Space>"
 let mapleader = "ç"
 
 " =============================================================================
@@ -73,7 +72,6 @@ let g:secure_modelines_allowed_items = [
 
 
 " Lightline
-" let g:lightline = { 'colorscheme': 'wombat' }
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'component_function': {
@@ -83,7 +81,6 @@ let g:lightline = {
 function! LightlineFilename()
   return expand('%:t') !=# '' ? @% : '[No Name]'
 endfunction
-
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
@@ -105,16 +102,13 @@ let g:ale_rust_cargo_check_all_targets = 1
 
 " Open hotkeys
 map <C-p> :Files<CR>
-nmap <leader>; :Buffers<CR>
-nmap <leader>bb :Buffers<CR>
+nmap <leader>b :Buffers<CR>
 
-
-    "  'rust': ['rustup', 'run', 'nightly', 'rls'],
-    "\ 'rust': ['env', 'CARGO_TARGET_DIR=/home/jon/dev/tmp/cargo-target/rls', 'rls'],
 " language server protocol
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['env', 'CARGO_TARGET_DIR=~/.cargo/bin/rls', 'rls'],
     \ }
+
 let g:LanguageClient_autoStart = 1
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
@@ -170,7 +164,6 @@ set wildmenu
 set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
-
 " Wrapping options
 set formatoptions=tc " wrap text and comments using textwidth
 set formatoptions+=r " continue comments when pressing ENTER in I mode
@@ -205,7 +198,7 @@ set guioptions-=T " Remove toolbar
 set vb t_vb= " No more beeps
 set backspace=2 " Backspace over newlines
 set foldmethod=marker " Only fold on marks
-set ruler " Where am I?
+"set ruler " Where am I?
 set ttyfast
 " https://github.com/vim/vim/issues/1735#issuecomment-383353563
 set lazyredraw
@@ -223,7 +216,6 @@ set shortmess+=c " don't give |ins-completion-menu| messages.
 set background=dark
 colorscheme sourcerer
 hi Normal ctermbg=NONE
-" Get syntax
 syntax on
 
 " Show those damn hidden characters
@@ -232,8 +224,6 @@ set nolist
 set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
 " Neat X clipboard integration
-" ,p will paste clipboard into buffer
-" ,c will copy entire buffer into clipboard
 noremap <leader>p :read !xsel --clipboard --output<cr>
 noremap <leader>c :w !xsel -ib<cr><cr>
 
@@ -250,23 +240,25 @@ nnoremap <C-g> :cclose<cr>
 " <leader><leader> toggles between buffers
 nnoremap <leader><Tab> <c-^>
 
-
+" Change Y behavior
 nmap Y y$
 
 " File Editings
-nnoremap <leader>fer :source ~/.config/nvim/init.vim<CR>
-nnoremap <leader>sc :noh<CR>
-nnoremap <leader>fs :w<CR>
-nnoremap <leader>fS :w!<CR>
-nnoremap <leader>fed :e $MYVIMRC<CR>
+nnoremap <leader><F5> :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>n :noh<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>W :w!<CR>
+nnoremap <leader>qq :q<CR>
+nnoremap <leader>qf :q!<CR>
+nnoremap <leader><F4> :e $MYVIMRC<CR>
 " Open new file adjacent to current file
 nnoremap <leader>ff :e <C-R>=expand("%:p:h") . "/" <CR>
 
 
 nnoremap <leader>ss :s/
-nnoremap <leader>sb :%sm/
+nnoremap <leader>sa :%sm/
 " <leader>sr for Rg search
-noremap <leader>sr :Rg 
+noremap <leader>r :Rg 
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -311,7 +303,7 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 nmap <leader><space> <Plug>(easymotion-overwin-f2)
 
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+nmap <space>w <Plug>(easymotion-overwin-w)
 
 
 

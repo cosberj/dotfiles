@@ -49,16 +49,6 @@ rofi.color-urgent: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
 *.colorBD:      #d3d3d3
 *.colorUL: #528b8b
 
-!URxvt.font: xft:dina:size=10
-#URxvt*font: xft:iosevka-ss08:size=10
-#URxvt*font: xft:Iosevka:regular:size=11
 URxvt*font: xft:iosevka ss08:size=11
 URxvt.letterSpace: 0
 URxvt.scrollBar: false
-
-#URxvt.perl-lib: /home/vallahor/.lib/urxvt/
-#URxvt.perl-ext-common: default, keyboard-select
-#URxvt.keysym.M-Escape: perl:keyboard-select:activate
-#URxvt.keysym.M-s: perl:keyboard-select:search
-#URxvt.keyboard-select.clipboard: true
-
