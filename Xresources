@@ -1,17 +1,11 @@
-######################
-#                    #
-# Rofi Configuration #
-#                    #
-######################
-
-# rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi
+! rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi
 
 rofi.color-enabled: true
 
-# Window           background    border    separator
+! Window           background    border    separator
 rofi.color-window: #FFFFFF,      #FFFFFF,  #FFFFFF
 
-# State:           bg       fg       bgalt    hlbg     hlfg
+! State:           bg       fg       bgalt    hlbg     hlfg
 rofi.color-normal: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
 rofi.color-active: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
 rofi.color-urgent: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
@@ -49,6 +43,21 @@ rofi.color-urgent: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
 *.colorBD:      #d3d3d3
 *.colorUL: #528b8b
 
-URxvt*font: xft:iosevka ss08:size=11
+URxvt.font: xft:iosevka ss08:size=11
 URxvt.letterSpace: 0
 URxvt.scrollBar: false
+! Scripts
+URxvt.perl-lib: $HOME/.urxvt/ext/
+URxvt.perl-ext-common: keyboard-select, url-select, resize-font
+! keyboard-select
+URxvt.keysym.M-f: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keyboard-select.clipboard: true
+!url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+
+
+URxvt.keysym.M-C-j:     resize-font:smaller
+URxvt.keysym.M-C-k:      resize-font:bigger
+URxvt.keysym.M-C-equal:     resize-font:reset
+URxvt.keysym.M-C-question:  resize-font:show
