@@ -67,7 +67,7 @@ bindsym $mod+a focus mode_toggle
 #exec --no-startup-id spotify 
 
 # Init Tusk and always show in center
-bindsym $mod+t			[class="Tusk"] scratchpad show; [class="Tusk"] move position center
+bindsym $mod+n			[class="Tusk"] scratchpad show; [class="Tusk"] move position center
 for_window [class="Tusk"] floating enable
 for_window [class="Tusk"] resize set 1280 720
 for_window [class="Tusk"] move scratchpad

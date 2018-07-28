@@ -1,5 +1,5 @@
 set shell=/bin/bash
-let mapleader = "ç"
+let mapleader = "\<space>"
 
 " =============================================================================
 " # PLUGINS
@@ -8,15 +8,23 @@ let mapleader = "ç"
 set nocompatible
 filetype on
 
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+":PlugClean remove os plugins que não estão mais sendo usados
+":PlugUpdate o nome já diz
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Load plugins
 " VIM enhancements
 Plug 'ciaranm/securemodelines'
-Plug 'itchyny/lightline.vim'
 
 " GUI enhancements
-"Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'machakann/vim-highlightedyank'
 Plug 'xero/sourcerer'
@@ -34,7 +42,16 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'roxma/nvim-completion-manager'
+"Plug 'roxma/nvim-completion-manager'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-racer'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+
+" based on ultisnips
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'SirVer/ultisnips'
 
 " LanguageClient enhancements
 " Showing function signature and inline doc.
@@ -55,6 +72,7 @@ end
 if !has('gui_running')
   set t_Co=256
 endif
+
 
 " Plugin settings
 let g:secure_modelines_allowed_items = [
@@ -126,11 +144,6 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 "let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
-" Completion
-" tab to select
-" and don't hijack my enter key
-inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 
 " =============================================================================
@@ -138,7 +151,7 @@ inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"
 " =============================================================================
 filetype plugin indent on
 set autoindent
-set timeoutlen=300 " http://sackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
+"set timeoutlen=300 " http://sackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
 set encoding=utf-8
 set scrolloff=3
 set noshowmode
@@ -149,6 +162,27 @@ set nojoinspaces
 "  " screen does not (yet) support truecolor
 "  set termguicolors
 "endif
+
+" disable arrow keys
+noremap  <Up>    <Nop>
+noremap  <Down>  <Nop>
+noremap  <Left>  <Nop>
+noremap <Right> <Nop>
+
+"testar
+" escape with double tapping j in insert mode
+inoremap jj <Esc>
+
+" wrap lines visually
+set breakindent           " continue wrapped lines visually indented
+set linebreak             " break at 'breakat' rather than last character
+set showbreak=↪           " show ↪ before wrapped lines
+
+" keymap timeout settings
+set notimeout
+set ttimeout
+set ttimeoutlen=50
+
 
 set shiftwidth=4
 set softtabstop=4
@@ -196,13 +230,15 @@ cnoremap %s/ %sm/
 " =============================================================================
 set guioptions-=T " Remove toolbar
 set vb t_vb= " No more beeps
-set backspace=2 " Backspace over newlines
+"set backspace=2 " Backspace over newlines
+set backspace=indent,eol,start
 set foldmethod=marker " Only fold on marks
-"set ruler " Where am I?
 set ttyfast
 " https://github.com/vim/vim/issues/1735#issuecomment-383353563
 set lazyredraw
-set synmaxcol=200
+"set synmaxcol=250
+"set colorcolumn=100 " and give me a colored column
+"set ruler " Where am I?
 set laststatus=2
 set relativenumber " Relative line numbers
 set number
@@ -211,6 +247,8 @@ set showcmd " Show (partial) command in status line.
 set mouse=a " Enable mouse usage (all modes) in terminals
 set completeopt-=preview
 set shortmess+=c " don't give |ins-completion-menu| messages.
+set noswapfile            " don't use swap files
+
 
 " Colors
 set background=dark
@@ -227,7 +265,6 @@ set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 noremap <leader>p :read !xsel --clipboard --output<cr>
 noremap <leader>c :w !xsel -ib<cr><cr>
 
- 
 " Jump to next/previous error
 nnoremap <C-j> :cnext<cr>
 nnoremap <C-k> :cprev<cr>
@@ -242,35 +279,45 @@ nnoremap <leader><Tab> <c-^>
 
 " Change Y behavior
 nmap Y y$
+nnoremap U <C-r>
 
 " File Editings
-nnoremap <leader><F5> :source ~/.config/nvim/init.vim<CR>
+"nnoremap <leader><F5> :source ~/.config/nvim/init.vim<CR>
+nnoremap <silent><leader>fer :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>n :noh<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <leader>W :w!<CR>
-nnoremap <leader>qq :q<CR>
-nnoremap <leader>qf :q!<CR>
-nnoremap <leader><F4> :e $MYVIMRC<CR>
+nnoremap <silent><leader>fs :w<CR>
+nnoremap <silent><leader>fS :w!<CR>
+nnoremap <silent><leader>fqq :q<CR>
+nnoremap <silent><leader>fqf :q!<CR>
+"nnoremap <leader><F4> :e $MYVIMRC<CR>
+nnoremap <silent><leader>fed :e $MYVIMRC<CR>
 " Open new file adjacent to current file
-nnoremap <leader>ff :e <C-R>=expand("%:p:h") . "/" <CR>
+"nnoremap <silent><leader>ff :e <C-R>=expand("%:p:h") . "/" <CR>
 
+nnoremap <Leader>wd :bd<CR>
 
-nnoremap <leader>ss :s/
-nnoremap <leader>sa :%sm/
+nnoremap <silent><leader>ss :s/
+nnoremap <silent><leader>sa :%sm/
 " <leader>sr for Rg search
-noremap <leader>r :Rg 
+"noremap <leader>r :Rg 
+noremap <silent><leader>/ :Rg 
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --smart-case --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-
 " <leader>= reformats current tange
 nnoremap <leader>= :'<,'>RustFmtRange<cr>
 
+"usar com quickfix list depois do resultado do rg/ag/fd apertar alt+a depois enter
+"para chegar no quickfix list então poder trocar os nomes
+nnoremap <leader><F3> :cfdo 
+
+" Outro exemplo pra usar no quickfix list :cdo normal @q // pode usar macros
+nnoremap <leader><F4> :cdo 
 
 " <leader>, shows/hides hidden characters
 nnoremap <leader>, :set invlist<cr>
@@ -284,6 +331,35 @@ if has("autocmd")
   " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
   au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+ " enable ncm2 for all buffers
+ autocmd BufEnter * call ncm2#enable_for_buffer()
+ " :help Ncm2PopupOpen for more information
+ set completeopt=noinsert,menuone,noselect
+
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+"au User Ncm2Plugin call ncm2#register_source({
+"        \ 'name' : 'rust',
+"        \ 'priority': 9, 
+"        \ 'subscope_enable': 1,
+"        \ 'scope': ['rs'],
+"        \ 'mark': 'rs',
+"        \ 'word_pattern': '[\w\-]+',
+"        \ 'complete_pattern': ':\s*',
+"        \ 'on_complete': ['ncm2#on_complete#omni'],
+"        \ })
+" The parameters are the same as `:help feedkeys()`
+"inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+" Completion
+" tab to select
+" and don't hijack my enter key
+inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 
 " Help filetype detection
@@ -301,9 +377,7 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 
-nmap <leader><space> <Plug>(easymotion-overwin-f2)
+nmap <leader>j <Plug>(easymotion-overwin-f2)
 
-nmap <space>w <Plug>(easymotion-overwin-w)
-
-
+"nmap <leader>w <Plug>(easymotion-overwin-w)
 

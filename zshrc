@@ -103,5 +103,8 @@ alias vi=nvim
 alias logout="sudo pkill -u ${USER}"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
+export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --exclude .git --color=always"
+export FZF_DEFAULT_OPTS="--ansi"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
