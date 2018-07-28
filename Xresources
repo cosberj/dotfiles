@@ -47,7 +47,7 @@ URxvt.font: xft:iosevka ss08:size=11
 URxvt.letterSpace: 0
 URxvt.scrollBar: false
 ! Scripts
-URxvt.perl-lib: $HOME/.urxvt/ext/
+URxvt.perl-lib: $HOME/.config/urxvt/ext/
 URxvt.perl-ext-common: keyboard-select, url-select, font-size
 ! keyboard-select
 URxvt.keysym.M-f: perl:keyboard-select:activate

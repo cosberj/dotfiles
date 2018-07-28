@@ -22,6 +22,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Load plugins
 " VIM enhancements
 Plug 'ciaranm/securemodelines'
+Plug 'junegunn/vim-peekaboo'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
@@ -42,17 +43,15 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-"Plug 'roxma/nvim-completion-manager'
+"completion ncm2
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-racer'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-
-" based on ultisnips
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'SirVer/ultisnips'
-
+Plug 'honza/vim-snippets'
+Plug 'ncm2/ncm2-abbrfuzzy'
+Plug 'ncm2/ncm2-bufword'
+"Plug 'ncm2/ncm2-match-highlight'
 " LanguageClient enhancements
 " Showing function signature and inline doc.
 Plug 'Shougo/echodoc.vim'
@@ -118,18 +117,15 @@ let g:ale_lint_on_enter = 0
 let g:ale_rust_cargo_use_check = 1
 let g:ale_rust_cargo_check_all_targets = 1
 
-" Open hotkeys
-map <C-p> :Files<CR>
-nmap <leader>b :Buffers<CR>
-
 " language server protocol
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['env', 'CARGO_TARGET_DIR=~/.cargo/bin/rls', 'rls'],
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
     \ }
 
+let g:LanguageClient_completionPreferTextEdit = 1
 let g:LanguageClient_autoStart = 1
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> H :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
@@ -140,11 +136,29 @@ let g:rustfmt_options = "--emit files"
 let g:rustfmt_autosave = 1
 let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
-"let g:racer_cmd = "/usr/bin/racer"
-"let g:racer_experimental_completer = 1
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
+"completion
 
+inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
+
+" c-j c-k for moving in snippet
+imap <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
+smap <c-u> <Plug>(ultisnips_expand)
+let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:ncm2#matcher = 'abbrfuzzy'
+let g:ncm2#sorter = 'abbrfuzzy'
+let g:ncm2#comple_length=1
+inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
+"inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
+set completeopt=noinsert,menuone,noselect
+
+au BufEnter * call ncm2#enable_for_buffer()
+au TextChangedI * call ncm2#auto_trigger()
 
 " =============================================================================
 " # Editor settings
@@ -158,10 +172,6 @@ set noshowmode
 set hidden
 set nowrap
 set nojoinspaces
-"if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
-"  " screen does not (yet) support truecolor
-"  set termguicolors
-"endif
 
 " disable arrow keys
 noremap  <Up>    <Nop>
@@ -230,15 +240,11 @@ cnoremap %s/ %sm/
 " =============================================================================
 set guioptions-=T " Remove toolbar
 set vb t_vb= " No more beeps
-"set backspace=2 " Backspace over newlines
 set backspace=indent,eol,start
 set foldmethod=marker " Only fold on marks
 set ttyfast
 " https://github.com/vim/vim/issues/1735#issuecomment-383353563
 set lazyredraw
-"set synmaxcol=250
-"set colorcolumn=100 " and give me a colored column
-"set ruler " Where am I?
 set laststatus=2
 set relativenumber " Relative line numbers
 set number
@@ -261,46 +267,6 @@ syntax on
 set nolist
 set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 
-" Neat X clipboard integration
-noremap <leader>p :read !xsel --clipboard --output<cr>
-noremap <leader>c :w !xsel -ib<cr><cr>
-
-" Jump to next/previous error
-nnoremap <C-j> :cnext<cr>
-nnoremap <C-k> :cprev<cr>
-nmap <silent> L <Plug>(ale_lint)
-"nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-"nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nnoremap <C-l> :copen<cr>
-nnoremap <C-g> :cclose<cr>
-
-" <leader><leader> toggles between buffers
-nnoremap <leader><Tab> <c-^>
-
-" Change Y behavior
-nmap Y y$
-nnoremap U <C-r>
-
-" File Editings
-"nnoremap <leader><F5> :source ~/.config/nvim/init.vim<CR>
-nnoremap <silent><leader>fer :source ~/.config/nvim/init.vim<CR>
-nnoremap <leader>n :noh<CR>
-nnoremap <silent><leader>fs :w<CR>
-nnoremap <silent><leader>fS :w!<CR>
-nnoremap <silent><leader>fqq :q<CR>
-nnoremap <silent><leader>fqf :q!<CR>
-"nnoremap <leader><F4> :e $MYVIMRC<CR>
-nnoremap <silent><leader>fed :e $MYVIMRC<CR>
-" Open new file adjacent to current file
-"nnoremap <silent><leader>ff :e <C-R>=expand("%:p:h") . "/" <CR>
-
-nnoremap <Leader>wd :bd<CR>
-
-nnoremap <silent><leader>ss :s/
-nnoremap <silent><leader>sa :%sm/
-" <leader>sr for Rg search
-"noremap <leader>r :Rg 
-noremap <silent><leader>/ :Rg 
 let g:fzf_layout = { 'down': '~20%' }
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -309,18 +275,6 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" <leader>= reformats current tange
-nnoremap <leader>= :'<,'>RustFmtRange<cr>
-
-"usar com quickfix list depois do resultado do rg/ag/fd apertar alt+a depois enter
-"para chegar no quickfix list então poder trocar os nomes
-nnoremap <leader><F3> :cfdo 
-
-" Outro exemplo pra usar no quickfix list :cdo normal @q // pode usar macros
-nnoremap <leader><F4> :cdo 
-
-" <leader>, shows/hides hidden characters
-nnoremap <leader>, :set invlist<cr>
 
 
 " Leave paste mode when leaving insert mode
@@ -331,36 +285,6 @@ if has("autocmd")
   " https://stackoverflow.com/questions/31449496/vim-ignore-specifc-file-in-autocommand
   au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
- " enable ncm2 for all buffers
- autocmd BufEnter * call ncm2#enable_for_buffer()
- " :help Ncm2PopupOpen for more information
- set completeopt=noinsert,menuone,noselect
-
-
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-inoremap <c-c> <ESC>
-
-"au User Ncm2Plugin call ncm2#register_source({
-"        \ 'name' : 'rust',
-"        \ 'priority': 9, 
-"        \ 'subscope_enable': 1,
-"        \ 'scope': ['rs'],
-"        \ 'mark': 'rs',
-"        \ 'word_pattern': '[\w\-]+',
-"        \ 'complete_pattern': ':\s*',
-"        \ 'on_complete': ['ncm2#on_complete#omni'],
-"        \ })
-" The parameters are the same as `:help feedkeys()`
-"inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-" Completion
-" tab to select
-" and don't hijack my enter key
-inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
-
 
 " Help filetype detection
 autocmd BufRead *.plot set filetype=gnuplot
@@ -376,8 +300,63 @@ let g:EasyMotion_smartcase = 1
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
+" Open hotkeys
+map <C-p> :Files<CR>
+nmap <leader>b :Buffers<CR>
 
 nmap <leader>j <Plug>(easymotion-overwin-f2)
 
-"nmap <leader>w <Plug>(easymotion-overwin-w)
+" <leader>= reformats current tange
+nnoremap <leader>= :'<,'>RustFmtRange<cr>
 
+"usar com quickfix list depois do resultado do rg/ag/fd apertar alt+a depois enter
+"para chegar no quickfix list então poder trocar os nomes
+nnoremap <leader><F3> :cfdo 
+
+" Outro exemplo pra usar no quickfix list :cdo normal @q // pode usar macros
+nnoremap <leader><F4> :cdo 
+
+" <leader>, shows/hides hidden characters
+nnoremap <leader>, :set invlist<cr>
+
+" Neat X clipboard integration
+noremap <leader>p :read !xsel --clipboard --output<cr>
+noremap <leader>c :w !xsel -ib<cr><cr>
+
+" Jump to next/previous error
+"nnoremap <C-j> :cnext<cr>
+"nnoremap <C-k> :cprev<cr>
+nmap <silent> L <Plug>(ale_lint)
+"nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"nnoremap <C-l> :copen<cr>
+"nnoremap <C-g> :cclose<cr>
+
+" <leader><leader> toggles between buffers
+nnoremap <leader><Tab> <c-^>
+
+" Change Y behavior
+nmap Y y$
+nnoremap U <C-r>
+
+" File Editings
+nnoremap <silent><leader>fer :source ~/.config/nvim/init.vim<CR>
+nnoremap <silent><leader>fs :w<CR>
+nnoremap <silent><leader>fS :w!<CR>
+nnoremap <silent><leader>fqq :q<CR>
+nnoremap <silent><leader>fqf :q!<CR>
+nnoremap <silent><leader>fed :e $MYVIMRC<CR>
+" Open new file adjacent to current file
+"nnoremap <silent><leader>ff :e <C-R>=expand("%:p:h") . "/" <CR>
+
+nnoremap <leader>n :noh<CR>
+nnoremap <Leader>wd :bd<CR>
+
+nnoremap <silent><leader>ss :s/
+nnoremap <silent><leader>sa :%sm/
+
+let g:peekaboo_window = 'vertical botright 50new'
+
+" <leader>sr for Rg search
+"noremap <leader>r :Rg 
+noremap <silent><leader>/ :Rg 
