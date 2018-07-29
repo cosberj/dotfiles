@@ -99,6 +99,12 @@ for_window [class="vlc"] resize set 1280 720
 for_window [class="vlc"] border pixel 5
 for_window [class="vlc"] move position center
 
+#Popcorn Time always in center
+
+for_window [title="Butter"] floating enable
+for_window [title="Butter"] resize set 1280 720
+for_window [title="Butter"] border pixel 5
+for_window [title="Butter"] move position center
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -196,6 +202,7 @@ exec --no-startup-id nm-applet
 # Background
 exec_always --no-startup-id feh --bg-scale ~/.wall/wall0.png
 exec --no-startup-id xset -b b off
+exec_always --no-startup-id compton 
 exec_always --no-startup-id xrdb ~/.Xresources
 exec_always --no-startup-id xrandr -s 1920x1080 -r 120
 # Music player daemon:
