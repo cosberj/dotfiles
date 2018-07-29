@@ -43,7 +43,7 @@ rofi.color-urgent: #FFFFFF, #404552, #FFFFFF, #FFFFFF, #A5CCFF
 *.colorBD:      #d3d3d3
 *.colorUL: #528b8b
 
-URxvt.font: xft:iosevka ss08:size=11
+URxvt.font: xft:iosevka ss08:size=13
 URxvt.letterSpace: 0
 URxvt.scrollBar: false
 ! Scripts

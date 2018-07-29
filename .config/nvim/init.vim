@@ -38,27 +38,18 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Semantic language support
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
-    \ }
-"completion ncm2
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-ultisnips'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'ncm2/ncm2-abbrfuzzy'
-Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-match-highlight'
-" LanguageClient enhancements
-" Showing function signature and inline doc.
-Plug 'Shougo/echodoc.vim'
+    \}
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Syntactic language support
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+
+Plug 'Shougo/echodoc.vim'
 
 call plug#end()
 
@@ -117,19 +108,22 @@ let g:ale_lint_on_enter = 0
 let g:ale_rust_cargo_use_check = 1
 let g:ale_rust_cargo_check_all_targets = 1
 
+    "\ 'rust': ['rustup', 'run', 'nightly', 'rls']
 " language server protocol
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+    \ 'rust': ['env', 'CARGO_TARGET_DIR=~/.cargo/bin/rls', 'rls'],
     \ }
 
 let g:LanguageClient_completionPreferTextEdit = 1
 let g:LanguageClient_autoStart = 1
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
 nnoremap <silent> H :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <F3> :call LanguageClient_textDocument_documentSymbol()<CR> 
+nnoremap <silent> <F4> :call LanguageClient_textDocument_references()<CR>
 
-" racer + rust
+"rust
 " https://github.com/rust-lang/rust.vim/issues/192
 let g:rustfmt_command = "rustfmt +nightly"
 let g:rustfmt_options = "--emit files"
@@ -138,28 +132,11 @@ let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
 let $RUST_SRC_PATH = systemlist("rustc --print sysroot")[0] . "/lib/rustlib/src/rust/src"
 
-"completion
-
-inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
-
-" c-j c-k for moving in snippet
-imap <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
-smap <c-u> <Plug>(ultisnips_expand)
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:ncm2#matcher = 'abbrfuzzy'
-let g:ncm2#sorter = 'abbrfuzzy'
-let g:ncm2#comple_length=1
+let g:deoplete#enable_at_startup = 1
 inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-"inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
-set completeopt=noinsert,menuone,noselect
-
-au BufEnter * call ncm2#enable_for_buffer()
-au TextChangedI * call ncm2#auto_trigger()
-
+set completeopt=menu,noinsert,menuone,noselect
 " =============================================================================
 " # Editor settings
 " =============================================================================
@@ -355,8 +332,11 @@ nnoremap <Leader>wd :bd<CR>
 nnoremap <silent><leader>ss :s/
 nnoremap <silent><leader>sa :%sm/
 
+nnoremap <silent><leader>; A;<Esc>
+
 let g:peekaboo_window = 'vertical botright 50new'
 
 " <leader>sr for Rg search
 "noremap <leader>r :Rg 
 noremap <silent><leader>/ :Rg 
+

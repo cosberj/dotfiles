@@ -58,13 +58,12 @@ bindsym $mod+Shift+a floating toggle
 bindsym $mod+a focus mode_toggle
 
 # Init Spotify and always show in center
-# Não ta funcionando no desktop (spotify erro)
-#bindsym $mod+m			[class="Spotify"] scratchpad show; [class="Spotify"] move position center
-#for_window [class="Spotify"] floating enable
-#for_window [class="Spotify"] resize set 1280 720
-#for_window [class="Spotify"] move scratchpad
-#for_window [class="Spotify"] border pixel 5
-#exec --no-startup-id spotify 
+bindsym $mod+m			[class="Spotify"] scratchpad show; [class="Spotify"] move position center
+for_window [class="Spotify"] floating enable
+for_window [class="Spotify"] resize set 1280 720
+for_window [class="Spotify"] move scratchpad
+for_window [class="Spotify"] border pixel 5
+exec --no-startup-id spotify 
 
 # Init Tusk and always show in center
 bindsym $mod+n			[class="Tusk"] scratchpad show; [class="Tusk"] move position center
@@ -72,7 +71,7 @@ for_window [class="Tusk"] floating enable
 for_window [class="Tusk"] resize set 1280 720
 for_window [class="Tusk"] move scratchpad
 for_window [class="Tusk"] border pixel 5
-exec_always --no-startup-id "snap run tusk"
+exec --no-startup-id tusk
 
 
 # Init Spotify and always show in center
@@ -81,7 +80,7 @@ for_window [class="Zenkit"] floating enable
 for_window [class="Zenkit"] resize set 1280 720
 for_window [class="Zenkit"] move scratchpad
 for_window [class="Zenkit"] border pixel 5
-exec_always --no-startup-id "snap run zenkit"
+exec --no-startup-id zenkit
 
 # Init Spotify and always show in center
 bindsym $mod+F9			[class="Bitwarden"] scratchpad show; [class="Bitwarden"] move position center
@@ -89,7 +88,7 @@ for_window [class="Bitwarden"] floating enable
 for_window [class="Bitwarden"] resize set 1280 720
 for_window [class="Bitwarden"] move scratchpad
 for_window [class="Bitwarden"] border pixel 5
-exec_always --no-startup-id "snap run bitwarden"
+exec --no-startup-id bitwarden
 
 
 
@@ -140,6 +139,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # Assign classes to workspaces
 assign [class="Firefox"] $ws2
+assign [class="Emacs"] $ws3
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

@@ -97,7 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # User specific aliases and functions
-export PATH="$HOME/.cargo/bin:$PATH"
+export EMACS_BIN="$HOME/.emacs.d/bin"
+export PATH="$HOME/.cargo/bin:$EMACS_BIN:$PATH"
 alias vim=nvim
 alias vi=nvim
 alias logout="sudo pkill -u ${USER}"
