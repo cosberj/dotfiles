@@ -271,8 +271,6 @@ autocmd BufRead *.tex set filetype=tex
 autocmd BufRead *.trm set filetype=c
 autocmd BufRead *.xlsx.axlsx set filetype=ruby
 
-
-
 let g:EasyMotion_smartcase = 1
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings

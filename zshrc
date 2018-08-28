@@ -97,10 +97,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # User specific aliases and functions
+export LD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$LD_LIBRARY_PATH
 export EMACS_BIN="$HOME/.emacs.d/bin"
-export PATH="$HOME/.cargo/bin:$EMACS_BIN:$PATH"
+export PATH="$HOME/.cargo/bin:$EMACS_BIN:$LD_LIBRARY_PATH:$PATH"
 alias vim=nvim
 alias vi=nvim
+alias emacs="emacs -mm"
 alias logout="sudo pkill -u ${USER}"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
@@ -109,3 +111,5 @@ export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+setxkbmap -option caps:swapescape
