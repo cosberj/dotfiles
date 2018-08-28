@@ -1,5 +1,6 @@
 ;;; completion/lsp/config.el -*- lexical-binding: t; -*-
 
+
 (def-package! lsp-mode
   :commands (lsp-mode lsp-define-stdio-client))
 
@@ -16,13 +17,13 @@
         lsp-ui-doc-border "Gray"
         )
   )
-
-
 (def-package! company-lsp
   :after lsp-mode
   :config
   (set-company-backend! 'lsp-mode 'company-lsp)
-  (setq company-lsp-enable-recompletion t))
+  (setq company-lsp-enable-recompletion t)
+  (setq company-lsp-async t)
+  (setq company-lsp-cache-candidates t))
 
 
 (def-package! lsp-rust
