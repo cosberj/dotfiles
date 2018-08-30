@@ -17,7 +17,8 @@
 
        :completion
        (company          ; the ultimate code completion backend
-        +auto)           ; as-you-type code completion
+        +auto
+        +childframe)           ; as-you-type code completion
        ;; (helm             ; the *other* search engine for love and life
        ;;  +fuzzy)          ; enable fuzzy search backend for helm
                                         ;ido               ; the other *other* search engine...
@@ -126,7 +127,7 @@
        (sh +fish)        ; she sells (ba|z)sh shells on the C xor
                                         ;solidity          ; do you need a blockchain? No.
                                         ;swift             ; who asked for emoji variables?
-       web               ; the tubes
+       ;; web               ; the tubes
 
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and

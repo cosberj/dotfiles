@@ -3,6 +3,8 @@
 (setq doom-font (font-spec :family "Inconsolata" :size 17)
       doom-variable-pitch-font (font-spec :family "Inconsolata")
       doom-big-font (font-spec :family "Inconsolata" :size 17))
+(setq doom-themes-enable-bold nil)
+(setq doom-themes-enable-italic nil)
 (setq doom-theme 'doom-sourcerer)
 (map! :gnvime "C-p" nil)
 (map! :nv "M-F" #'+ivy/project-search
