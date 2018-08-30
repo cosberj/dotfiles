@@ -12,16 +12,17 @@
   ;;   :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-sideline-ignore-duplicate t)
   ;; )
-  (setq lsp-ui-doc-max-height 8
+  (setq lsp-ui-doc-max-height 10
         lsp-ui-doc-max-width 40
         lsp-ui-doc-border "Gray"
+        lsp-ui-doc-include-signature t
         )
   )
 (def-package! company-lsp
   :after lsp-mode
   :config
   (set-company-backend! 'lsp-mode 'company-lsp)
-  (setq company-lsp-enable-recompletion t)
+  ;; (setq company-lsp-enable-recompletion t)
   (setq company-lsp-async t)
   (setq company-lsp-cache-candidates t))
 

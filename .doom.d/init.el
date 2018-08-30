@@ -47,7 +47,7 @@
        window-select     ; visually switch windows
 
        :editor
-       format  ; automated prettiness
+       ( format +onsave)  ; automated prettiness
        multiple-cursors  ; editing in many places at once
                                         ;parinfer          ; turn lisp into python, sort of
 

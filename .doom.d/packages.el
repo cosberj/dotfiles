@@ -6,5 +6,6 @@
                     :files ("*")))
 (package! gotham-theme)
 (package! kaolin-themes)
+(package! company-box)
 ;; Filestuff
 (package! ranger)

@@ -15,7 +15,7 @@
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
 (setq display-line-numbers-type 'relative)
 (setq lsp-highlight-symbol-at-point nil)
-(setq which-key-idle-delay 0)
+(setq which-key-idle-delay 0.3)
 (map! :leader
       :desc "Find file in project" :nv "SPC" #'avy-goto-char-2
       )
