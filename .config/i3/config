@@ -63,7 +63,7 @@ for_window [class="Spotify"] floating enable
 for_window [class="Spotify"] resize set 1280 720
 for_window [class="Spotify"] move scratchpad
 for_window [class="Spotify"] border pixel 5
-exec --no-startup-id spotify 
+exec --no-startup-id spotify
 
 # Init Tusk and always show in center
 bindsym $mod+n			[class="Tusk"] scratchpad show; [class="Tusk"] move position center
@@ -74,7 +74,7 @@ for_window [class="Tusk"] border pixel 5
 exec --no-startup-id tusk
 
 
-# Init Spotify and always show in center
+# Init Zenkit and always show in center
 bindsym $mod+w			[class="Zenkit"] scratchpad show; [class="Zenkit"] move position center
 for_window [class="Zenkit"] floating enable
 for_window [class="Zenkit"] resize set 1280 720
@@ -82,7 +82,7 @@ for_window [class="Zenkit"] move scratchpad
 for_window [class="Zenkit"] border pixel 5
 exec --no-startup-id zenkit
 
-# Init Spotify and always show in center
+# Init Bitwarden and always show in center
 bindsym $mod+F9			[class="Bitwarden"] scratchpad show; [class="Bitwarden"] move position center
 for_window [class="Bitwarden"] floating enable
 for_window [class="Bitwarden"] resize set 1280 720
@@ -170,17 +170,17 @@ set $urgent-bg-color 	 #a54242
 
 # Window colors
 # 			border		   background	      text		   indicator
-client.focused 		$bg-color 	   $bg-color 	      $text-color 	   
-client.unfocused 	$inactive-bg-color $inactive-bg-color $inactive-text-color 
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color 
-client.urgent 		$urgent-bg-color   $urgent-bg-color   $text-color 	   
+client.focused 		$bg-color 	   $bg-color 	      $text-color
+client.unfocused 	$inactive-bg-color $inactive-bg-color $inactive-text-color
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color
+client.urgent 		$urgent-bg-color   $urgent-bg-color   $text-color
 
 # No borders
 for_window [class="^.*"] border pixel 0
 #new_window 1pixel
 
 # # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec amixer set Master -q 5%+ unmute 
+bindsym XF86AudioRaiseVolume exec amixer set Master -q 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer set Master -q 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
@@ -202,7 +202,7 @@ exec --no-startup-id nm-applet
 # Background
 exec_always --no-startup-id feh --bg-scale ~/.wall/wall0.png
 exec --no-startup-id xset -b b off
-exec_always --no-startup-id compton 
+exec_always --no-startup-id compton
 exec_always --no-startup-id xrdb ~/.Xresources
 exec_always --no-startup-id xrandr -s 1920x1080 -r 120
 # Music player daemon:
