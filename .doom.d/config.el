@@ -1,7 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(setq doom-font (font-spec :family "Inconsolata" :size 17)
-      doom-variable-pitch-font (font-spec :family "iosevka ss08")
+(setq doom-font (font-spec :family "iosevka ss08" :size 16)
       doom-big-font (font-spec :family "iosevka ss08" :size 17))
 ;; (setq doom-themes-enable-bold nil)
 ;; (setq doom-themes-enable-italic nil)
@@ -11,11 +10,12 @@
 (map! :gnvime "C-p" nil)
 (map! :nv "M-F" #'+ivy/project-search
       ;; :gnvime "C-p" #'projectile-find-file
+      :gnvime "C-ç" #'persp-switch-to-buffer
       :gnvime "M-p" #'projectile-find-file
       :nv "M-s" #'imenu
       )
 (global-set-key (kbd "C-p") 'projectile-find-file)
-(global-set-key (kbd "C-ç") 'persp-switch-to-buffer)
+;; (global-set-key (kbd "C-ç") 'persp-switch-to-buffer)
 (add-hook 'rust-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
