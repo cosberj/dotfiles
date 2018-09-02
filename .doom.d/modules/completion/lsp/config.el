@@ -25,7 +25,8 @@
   (set-company-backend! 'lsp-mode 'company-lsp)
   ;; (setq company-lsp-enable-recompletion t)
   (setq company-lsp-async t)
-  (setq company-lsp-cache-candidates t))
+  (setq company-lsp-cache-candidates t)
+  )
 
 
 (def-package! lsp-rust

@@ -6,6 +6,8 @@
 ;; (setq doom-themes-enable-italic nil)
 ;; (setq doom-theme 'doom-sourcerer)
 ;;
+(after! highlight-numbers
+  (setq highlight-numbers-generic-regexp "\\_<[[:digit:]]+\\(?:\\.[0-9]*\\)?\\_>"))
 (setq doom-theme 'kaolin-dark)
 (map! :gnvime "C-p" nil)
 (map! :nv "M-F" #'+ivy/project-search
@@ -20,13 +22,24 @@
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq display-line-numbers-type 'relative)
-(setq lsp-highlight-symbol-at-point nil)
 ;; (setq which-key-idle-delay 0.3)
 (map! :leader
       :desc "Find file in project" :nv "SPC" #'avy-goto-char-2
       )
 ;; (setq evil-escape-key-sequence "kj")
-(load! "+ranger") ;; File manager stuff
-(load! "+key-chord") ;; File manager stuff
 
 ;; (setq lsp-ui-doc-position 'at-point)
+
+(after! lsp-mode
+  (setq lsp-highlight-symbol-at-point nil)
+  )
+(def-package! all-the-icons-ivy
+  :config
+  (setq all-the-icons-ivy-file-commands
+        '(counsel-find-file counsel-file-jump counsel-recentf counsel-projectile-find-file counsel-projectile-find-dir))
+  (setq all-the-icons-ivy-buffer-commands '(persp-switch-to-buffer +ivy/switch-workspace-buffer))
+  (all-the-icons-ivy-setup)
+  )
+
+(load! "+ranger") ;; File manager stuff
+(load! "+key-chord") ;; File manager stuff
