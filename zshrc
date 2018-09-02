@@ -112,4 +112,5 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-setxkbmap -option caps:swapescape
+#setxkbmap -option caps:swapescape
+  setxkbmap -option ctrl:nocaps       # Make Caps Lock a Control key

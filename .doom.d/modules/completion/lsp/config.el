@@ -7,16 +7,17 @@
 (def-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :config
-  ;; (set-lookup-handlers! 'lsp-ui-mode
-  ;;   :definition #'lsp-ui-peek-find-definitions
-  ;;   :references #'lsp-ui-peek-find-references)
+  (set-lookup-handlers! 'lsp-ui-mode
+    :definition #'lsp-ui-peek-find-definitions
+    :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-sideline-ignore-duplicate t)
   ;; )
-  (setq lsp-ui-doc-max-height 10
-        lsp-ui-doc-max-width 40
-        lsp-ui-doc-border "Gray"
-        lsp-ui-doc-include-signature t
-        )
+  (setq
+   lsp-ui-doc-max-height 10
+   lsp-ui-doc-max-width 50
+   lsp-ui-doc-border "Gray"
+   ;; lsp-ui-doc-include-signature t
+   )
   )
 (def-package! company-lsp
   :after lsp-mode
