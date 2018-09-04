@@ -332,6 +332,7 @@ nnoremap <silent><leader>sa :%sm/
 
 nnoremap <silent><leader>; A;<Esc>
 
+
 let g:peekaboo_window = 'vertical botright 50new'
 
 " <leader>sr for Rg search

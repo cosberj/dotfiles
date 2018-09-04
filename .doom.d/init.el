@@ -12,13 +12,15 @@
        snippets          ; my elves. They type so I don't have to
        spellcheck        ; tasing you for misspelling mispelling
        (syntax-checker   ; tasing you for every semicolon you forget
-        +childframe)     ; use childframes for error popups (Emacs 26+ only)
+        ;; +childframe
+        )     ; use childframes for error popups (Emacs 26+ only)
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
        (company          ; the ultimate code completion backend
         +auto
-        +childframe)           ; as-you-type code completion
+        ;; +childframe
+        )           ; as-you-type code completion
        ;; (helm             ; the *other* search engine for love and life
        ;;  +fuzzy)          ; enable fuzzy search backend for helm
                                         ;ido               ; the other *other* search engine...
@@ -79,7 +81,7 @@
                                         ;pdf               ; pdf enhancements
                                         ;prodigy           ; FIXME managing external services & code builders
                                         ;rgb               ; creating color strings
-                                        ;tmux              ; an API for interacting with tmux
+       tmux              ; an API for interacting with tmux
                                         ;upload            ; map local to remote projects via ssh/ftp
                                         ;wakatime
 

@@ -1,6 +1,7 @@
 
 set $mod mod4
-set $term --no-startup-id urxvt256c
+# set $term --no-startup-id urxvt256c
+set $term --no-startup-id alacritty
 
 font pango:iosevka ss08 10
 
@@ -210,5 +211,6 @@ exec_always --no-startup-id xrandr -s 1920x1080 -r 120
 
 bar {
 status_command i3status
+position top
 }
 
