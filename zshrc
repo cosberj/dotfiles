@@ -106,6 +106,7 @@ alias vi=nvim
 alias emacs="env TERM=screen-256color emacs -nw"
 alias ls=exa
 alias logout="sudo pkill -u ${USER}"
+alias pdf=zathura
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --exclude .git --color=always"
