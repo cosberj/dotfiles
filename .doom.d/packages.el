@@ -3,6 +3,5 @@
 (package! gotham-theme)
 (package! kaolin-themes)
 (package! key-chord)
-(package! all-the-icons-ivy)
 ;; Filestuff
 (package! ranger)

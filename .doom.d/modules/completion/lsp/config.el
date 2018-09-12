@@ -2,23 +2,26 @@
 
 
 (def-package! lsp-mode
-  :commands (lsp-mode lsp-define-stdio-client))
-
-(def-package! lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (set-lookup-handlers! 'lsp-ui-mode
-    :definition #'lsp-ui-peek-find-definitions
-    :references #'lsp-ui-peek-find-references)
-  (setq lsp-ui-sideline-ignore-duplicate t)
-  ;; )
-  (setq
-   lsp-ui-doc-max-height 10
-   lsp-ui-doc-max-width 50
-   lsp-ui-doc-border "Gray"
-   ;; lsp-ui-doc-include-signature t
-   )
+  :commands (lsp-mode lsp-define-stdio-client)
   )
+
+;; (def-package! lsp-ui
+;;   :hook (lsp-mode . lsp-ui-mode)
+;;   :config
+;;   (set-lookup-handlers! 'lsp-ui-mode
+;;     :definition #'lsp-ui-peek-find-definitions
+;;     :references #'lsp-ui-peek-find-references)
+;;   (setq lsp-ui-sideline-enable nil)
+;;   ;; (setq lsp-ui-sideline-ignore-duplicate t)
+;;   ;; )
+;;   (setq
+;;    lsp-ui-doc-max-height 10
+;;    lsp-ui-doc-max-width 50
+;;    lsp-ui-doc-border "Gray"
+;;    lsp-ui-doc-include-signature t
+;;    lsp-ui-doc-position 'at-point
+;;    )
+;;   )
 (def-package! company-lsp
   :after lsp-mode
   :config

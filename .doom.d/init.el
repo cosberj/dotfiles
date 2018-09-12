@@ -12,26 +12,27 @@
        snippets          ; my elves. They type so I don't have to
        spellcheck        ; tasing you for misspelling mispelling
        (syntax-checker   ; tasing you for every semicolon you forget
-        ;; +childframe
+        +childframe
         )     ; use childframes for error popups (Emacs 26+ only)
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
        (company          ; the ultimate code completion backend
+        +childframe
         +auto
-        ;; +childframe
         )           ; as-you-type code completion
-       ;; (helm             ; the *other* search engine for love and life
+       ;; (helm
+       ;;  +childframe ; the *other* search engine for love and life
        ;;  +fuzzy)          ; enable fuzzy search backend for helm
                                         ;ido               ; the other *other* search engine...
        (ivy              ; a search engine for love and life
-        +fuzzy
-        +childframe)          ; enable fuzzy search backend for ivy
+        +fuzzy)
+       ;; +childframe)          ; enable fuzzy search backend for ivy
 
        :ui
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       doom-modeline     ; a snazzy Atom-inspired mode-line
+       ( doom-modeline  +new)    ; a snazzy Atom-inspired mode-line
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
        evil-goggles      ; display visual hints when editing in evil
                                         ;fci               ; a `fill-column' indicator
@@ -43,6 +44,7 @@
        (popup            ; tame sudden yet inevitable temporary windows
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
+       ;; pretty-code
        ( pretty-code
          +iosevka)       ; replace bits of code with pretty symbols
                                         ;tabbar            ; FIXME an (incomplete) tab bar for Emacs

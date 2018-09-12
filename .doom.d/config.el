@@ -1,31 +1,50 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-(setq doom-font (font-spec :family "iosevka ss08" :size 16)
-      doom-big-font (font-spec :family "iosevka ss08" :size 17))
-;; (setq doom-themes-enable-bold nil)
-;; (setq doom-themes-enable-italic nil)
-;; (setq doom-theme 'kaolin-dark)
-(setq doom-theme 'gotham)
-(setq kaolin-themes-hl-line-colored t)
-(setq kaolin-themes-underline-wave t)
-(setq kaolin-themes-italic-comments t)
+;; (setq text-scale-mode-step 1.0
+;;       doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 14 :weight 'medium)
+;;       doom-font (font-spec :family "Source Code Pro" :size 14 :weight 'medium)
+;;       doom-big-font (font-spec :family "Source Code Pro" :size 21 :weight 'light)
+;;       doom-themes-enable-bold t
+;;       doom-themes-enable-italic t
+;;       doom-treemacs-enable-variable-pitch t)
+;; theme
+;;
+(setq doom-theme
+      ;; 'doom-sourcerer-personal
+      ;; 'doom-sourcerer
+      'doom-sourcerer-personal
+      doom-themes-padded-modeline nil
+      doom-treemacs-use-generic-icons nil)
+
+;; (setq-default line-spacing 0.1)
+;; (add-hook 'magit-revision-mode-hook (lambda () (setq line-spacing 0)))
+;; fonts
+(setq text-scale-mode-step 1.0
+      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 14 :weight 'medium)
+      doom-font (font-spec :family "IBM Plex Mono" :size 14 :weight 'medium)
+      doom-big-font (font-spec :family "IBM Plex Mono" :size 18 :weight 'light)
+      doom-themes-enable-bold t
+      doom-themes-enable-italic t
+      doom-treemacs-enable-variable-pitch t)
+
+
+;; default frame
+(add-to-list 'default-frame-alist '(height . 100))
+(add-to-list 'default-frame-alist '(width . 100))
+;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+;; (set-frame-parameter (selected-frame) 'alpha '(99 . 97))
+
+;; (setq kaolin-themes-hl-line-colored t)
+;; (setq kaolin-themes-underline-wave t)
+;; (setq kaolin-themes-italic-comments t)
 (map! :nv "M-F" #'+ivy/project-search
-      ;; :gnvime "C-p" #'projectile-find-file
-      :gnvime "C-ç" #'persp-switch-to-buffer
-      :gnvime "M-p" #'projectile-find-file
+      ;; :gnvime "M-p" #'counsel-projectile-find-file
+      :gnvime "M-p"  #'projectile-find-file
       :nv "M-s" #'imenu
       )
-(global-set-key (kbd "C-p") nil)
-(global-set-key (kbd "C-p") 'projectile-find-file)
-(global-set-key (kbd "C-ç") 'persp-switch-to-buffer)
 (add-hook 'rust-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-
-
-
-
-
 
 (setq display-line-numbers-type 'relative)
 (map! :leader
@@ -33,13 +52,7 @@
       )
 (after! lsp-mode
   (setq lsp-highlight-symbol-at-point nil)
-  )
-(def-package! all-the-icons-ivy
-  :config
-  (setq all-the-icons-ivy-file-commands
-        '(counsel-find-file counsel-file-jump counsel-recentf counsel-projectile-find-file counsel-projectile-find-dir))
-  (setq all-the-icons-ivy-buffer-commands '(persp-switch-to-buffer +ivy/switch-workspace-buffer))
-  (all-the-icons-ivy-setup)
+  (setq lsp-eldoc-render-all nil)
   )
 
 (load! "+ranger") ;; File manager stuff
