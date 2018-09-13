@@ -1,23 +1,17 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; (setq text-scale-mode-step 1.0
-;;       doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 14 :weight 'medium)
-;;       doom-font (font-spec :family "Source Code Pro" :size 14 :weight 'medium)
-;;       doom-big-font (font-spec :family "Source Code Pro" :size 21 :weight 'light)
-;;       doom-themes-enable-bold t
-;;       doom-themes-enable-italic t
-;;       doom-treemacs-enable-variable-pitch t)
-;; theme
-;;
 (setq doom-theme
       ;; 'doom-sourcerer-personal
-      ;; 'doom-sourcerer
-      'doom-sourcerer-personal
+      'kaolin-fusion
       doom-themes-padded-modeline nil
       doom-treemacs-use-generic-icons nil)
 
-;; (setq-default line-spacing 0.1)
-;; (add-hook 'magit-revision-mode-hook (lambda () (setq line-spacing 0)))
+
+;; evil-collection error message
+(setq evil-want-integration t)
+
+(setq-default line-spacing 0.1)
+(add-hook 'magit-revision-mode-hook (lambda () (setq line-spacing 0)))
 ;; fonts
 (setq text-scale-mode-step 1.0
       doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 14 :weight 'medium)
@@ -31,16 +25,15 @@
 ;; default frame
 (add-to-list 'default-frame-alist '(height . 100))
 (add-to-list 'default-frame-alist '(width . 100))
-;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
-;; (set-frame-parameter (selected-frame) 'alpha '(99 . 97))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 100))
 
-;; (setq kaolin-themes-hl-line-colored t)
-;; (setq kaolin-themes-underline-wave t)
-;; (setq kaolin-themes-italic-comments t)
+(setq kaolin-themes-hl-line-colored t)
+(setq kaolin-themes-underline-wave t)
+(setq kaolin-themes-italic-comments t)
 (map! :nv "M-F" #'+ivy/project-search
-      ;; :gnvime "M-p" #'counsel-projectile-find-file
       :gnvime "M-p"  #'projectile-find-file
       :nv "M-s" #'imenu
+      :nv "M-S" #'imenu-anywhere
       )
 (add-hook 'rust-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'prog-mode-hook #'+format|enable-on-save)

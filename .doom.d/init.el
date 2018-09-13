@@ -18,7 +18,7 @@
 
        :completion
        (company          ; the ultimate code completion backend
-        +childframe
+        ;; +childframe
         +auto
         )           ; as-you-type code completion
        ;; (helm

@@ -2,7 +2,11 @@
 
 
 (def-package! lsp-mode
+  ;; :hook (lsp-mode . lsp-enable-imenu)
   :commands (lsp-mode lsp-define-stdio-client)
+  :config
+  (require 'lsp-imenu)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
   )
 
 ;; (def-package! lsp-ui
