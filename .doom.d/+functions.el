@@ -1,22 +1,19 @@
 ;;; ~/tod/.doom.d/+functions.el -*- lexical-binding: t; -*-
 
 (defun new_line_down ()
+  "Act like "o" in vim."
   (interactive)
   (end-of-line)
   (newline-and-indent))
 
 (defun new_line_above ()
+  "Act like "O" in vim."
   (interactive)
   (previous-line)
   (new_line_down))
 
-
-;; (defun kill-whole-word ()
-;;   (interactive)
-;;   (er/expand-region)
-;;   (backward-delete-char-untabify))
-
 (defun copy-whole-line ()
+  "Copy current line."
   (interactive)
   (save-excursion
     (kill-new
@@ -24,8 +21,24 @@
       (point-at-bol)
       (point-at-eol)))))
 
+(defun copy-eol ()
+  "Act like y$ in vim."
+  (interactive)
+  (save-excursion
+    (kill-new
+     (buffer-substring
+      (point)
+      (point-at-eol)))))
+
+(defun select-whole-line ()
+  "Select current line."
+  (interactive)
+  (set-mark-command (beginning-of-line))
+  (end-of-line)
+  )
 
 (defun kill-current-buffer ()
+  "Kill current buffer."
   (interactive)
   (kill-buffer (current-buffer)))
 
@@ -41,6 +54,7 @@
     (kill-line arg)))
 
 (defun join-next-line ()
+  "Join next line."
   (interactive)
   (save-excursion
     (end-of-line)

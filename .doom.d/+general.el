@@ -16,12 +16,16 @@
  "M-p" 'project-find-file
  "M-i" 'imenu
  "M-I" 'imenu-anywhere
+ "M-l" 'copy-eol
+ "C-x C-b" 'switch-to-buffer
+ "M-S" '+ivy/project-search
+ "C-S-l" 'select-whole-line
  )
-
 
 (general-define-key
  :prefix "C-x"
- "k" 'kill-current-buffer)
+ "k" 'kill-current-buffer
+ "C-k" 'doom/kill-other-buffers)
 
 (defvar master-key "C-ç")
 
@@ -32,8 +36,8 @@
   "y" 'counsel-yank-pop
   "s" 'embrace-commander
   "p" '+default/find-in-config
-  "g" 'magit-status
-  "f" 'projectile-switch-project)
+  "g g" 'magit-status
+  "f p" 'projectile-switch-project)
 
 (master-def
   "q r" 'restart-emacs)
