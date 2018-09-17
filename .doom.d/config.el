@@ -27,20 +27,19 @@
 ;; default frame
 (add-to-list 'default-frame-alist '(height . 100))
 (add-to-list 'default-frame-alist '(width . 100))
-;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 100))
 
-(global-set-key (kbd "C-ç") 'evil-escape)
 
 ;; keys
-(setq display-line-numbers-type 'relative)
-(map! :nv "M-F" #'+ivy/project-search
-      :gnvime "M-p"  #'projectile-find-file
-      :nv "M-s" #'imenu
-      :nv "M-S" #'imenu-anywhere
-      )
-(map! :leader
-      :desc "Find file in project" :nv "SPC" #'avy-goto-char-2
-      )
+;; (setq display-line-numbers-type 'relative)
+;; (map! :nv "M-F" #'+ivy/project-search
+;;       :gnvime "M-p"  #'projectile-find-file
+;;       :nv "M-s" #'imenu
+;;       :nv "M-S" #'imenu-anywhere
+;;       )
+;; (map! :leader
+;;       :desc "Find file in project" :nv "SPC" #'avy-goto-char-2
+;;       )
 ;; modes
 (after! lsp-mode
   (setq lsp-highlight-symbol-at-point nil)
@@ -48,6 +47,7 @@
   )
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
-
+(delete-selection-mode)
 (load! "+ranger") ;; File manager stuff
-(load! "+key-chord") ;; Key Chord stuff
+(load! "+general") ;; File manager stuff
+;; (load! "+key-chord") ;; Key Chord stuff

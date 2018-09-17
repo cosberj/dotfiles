@@ -3,5 +3,8 @@
 (package! gotham-theme)
 (package! kaolin-themes)
 (package! key-chord)
+(package! general)
+(package! embrace)
+(package! iedit)
 ;; Filestuff
 (package! ranger)
