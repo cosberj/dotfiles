@@ -103,7 +103,7 @@ export PATH="$HOME/.cargo/bin:$EMACS_BIN:$LD_LIBRARY_PATH:$PATH"
 alias vim=nvim
 alias vi=nvim
 #alias emacs="emacs -mm"
-alias emacs="env TERM=screen-256color emacs -nw"
+#alias emacs="env TERM=screen-256color emacs -nw"
 alias ls=exa
 alias logout="sudo pkill -u ${USER}"
 alias pdf=zathura
