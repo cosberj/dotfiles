@@ -1,13 +1,13 @@
 ;;; ~/tod/.doom.d/+functions.el -*- lexical-binding: t; -*-
 
 (defun new_line_down ()
-  "Act like "o" in vim."
+  "Act like o in vim."
   (interactive)
   (end-of-line)
   (newline-and-indent))
 
 (defun new_line_above ()
-  "Act like "O" in vim."
+  "Act like O in vim."
   (interactive)
   (previous-line)
   (new_line_down))
