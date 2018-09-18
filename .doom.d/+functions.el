@@ -1,16 +1,16 @@
 ;;; ~/tod/.doom.d/+functions.el -*- lexical-binding: t; -*-
 
-(defun new_line_down ()
+(defun new-line-down ()
   "Act like o in vim."
   (interactive)
   (end-of-line)
   (newline-and-indent))
 
-(defun new_line_above ()
+(defun new-line-above ()
   "Act like O in vim."
   (interactive)
   (previous-line)
-  (new_line_down))
+  (new-line-down))
 
 (defun copy-whole-line ()
   "Copy current line."

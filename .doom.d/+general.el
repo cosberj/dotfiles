@@ -9,8 +9,8 @@
  "M-S" '+ivy/project-search
  "M-i" 'imenu
  "M-I" 'imenu-anywhere
- "C-o" 'new_line_down
- "C-S-o" 'new_line_above
+ "C-o" 'new-line-down
+ "C-S-o" 'new-line-above
  "M-l" 'copy-eol
  "M-W" 'copy-whole-line
  "C-k" 'kill-and-join-forward
@@ -27,7 +27,15 @@
  "M-="   'text-scale-increase
  "M--" 'text-scale-decrease
  [C-tab] '+company/complete
+ "C-a" 'doom/backward-to-bol-or-indent
+ "C-e" 'doom/forward-to-last-non-comment-or-eol
+ "C-u" 'doom/backward-kill-to-bol-and-indent
+ "<C-backspace>" 'doom/delete-backward-char
+ [M-backspace] 'doom/backward-kill-to-bol-and-indent
+ ;; "C-S-j" 'scroll-up-command
+ ;; "C-S-k" 'scroll-down-command
  )
+
 
 ;; should remember
 ;; c-x c-u -> upcase region
@@ -42,7 +50,9 @@
  :prefix "C-x"
  "k" 'kill-current-buffer
  "C-k" 'doom/kill-other-buffers
- "f" 'find-file-other-window)
+ "f" 'find-file-other-window
+ "C-d" '+lookup/definition
+ "C-S-d" '+lookup/references)
 
 (defvar master-key "C-ç")
 
@@ -54,7 +64,14 @@
   "p" '+default/find-in-config
   "i s" 'yas-insert-snippet
   "i y" 'counsel-yank-pop
-  "f p" 'projectile-switch-project)
+  )
+;; file stuff
+(master-def
+  "f y" '+default/yank-buffer-filename
+  "f p" 'projectile-switch-project
+  "f k" 'doom/delete-this-file
+  "f s" 'doom/sudo-this-file
+  "f x" 'doom/open-scratch-buffer)
 ;; git stuff
 (master-def
   "g s" 'magit-status
@@ -62,7 +79,7 @@
   "g c" 'magit-commit)
 ;; quiting
 (master-def
-  "q r" 'restart-emacs)
+  "q r" '+workspace/restart-emacs-then-restore)
 ;; workspaces
 (master-def
   "' n" '+workspace/new
