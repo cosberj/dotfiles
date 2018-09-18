@@ -33,6 +33,7 @@
 ;; c-x c-u -> upcase region
 ;; c-x c-l -> downcase region
 
+
 (general-define-key
  "C-*" 'iedit-mode
  "M-;" 'iedit-toggle-selection)
@@ -54,12 +55,18 @@
   "i s" 'yas-insert-snippet
   "i y" 'counsel-yank-pop
   "f p" 'projectile-switch-project)
+;; git stuff
 (master-def
   "g s" 'magit-status
   "g p" 'magit-push-popup
   "g c" 'magit-commit)
+;; quiting
 (master-def
   "q r" 'restart-emacs)
+;; workspaces
+(master-def
+  "' n" '+workspace/new
+  "' d" '+workspace/delete)
 
 (general-def swiper-map
   [backtab] '+ivy/wgrep-occur)
