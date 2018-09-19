@@ -30,7 +30,9 @@
 (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
 
 
-
+;; (add-hook! 'prog-mode-hook (internal-show-cursor nil nil))
+;; (setq-hook! 'prog-mode-hook blink-cursor-mode nil)
+(setq-hook! 'after-init-hook blink-cursor-mode nil)
 ;; modes
 (after! lsp-mode
   (setq lsp-highlight-symbol-at-point nil)

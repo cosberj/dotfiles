@@ -30,7 +30,7 @@
  "C-a" 'doom/backward-to-bol-or-indent
  "C-e" 'doom/forward-to-last-non-comment-or-eol
  "C-u" 'doom/backward-kill-to-bol-and-indent
- "<C-backspace>" 'doom/delete-backward-char
+ ;; "<C-backspace>" 'doom/delete-backward-char
  [M-backspace] 'doom/backward-kill-to-bol-and-indent
  ;; "C-S-j" 'scroll-up-command
  ;; "C-S-k" 'scroll-down-command
@@ -52,9 +52,14 @@
  "C-k" 'doom/kill-other-buffers
  "f" 'find-file-other-window
  "C-d" '+lookup/definition
- "C-S-d" '+lookup/references)
+ "C-S-d" '+lookup/references
+ "C-o" 'ace-window)
 
-(defvar master-key "C-ç")
+
+
+(global-set-key "\C-j" nil)
+(defvar master-key "C-j")
+
 
 (general-create-definer master-def
   :prefix master-key)
@@ -64,6 +69,7 @@
   "p" '+default/find-in-config
   "i s" 'yas-insert-snippet
   "i y" 'counsel-yank-pop
+  "C-j" 'avy-goto-char-2
   )
 ;; file stuff
 (master-def
@@ -72,6 +78,7 @@
   "f k" 'doom/delete-this-file
   "f s" 'doom/sudo-this-file
   "f x" 'doom/open-scratch-buffer)
+
 ;; git stuff
 (master-def
   "g s" 'magit-status

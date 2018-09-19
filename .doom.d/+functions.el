@@ -33,9 +33,13 @@
 (defun select-whole-line ()
   "Select current line."
   (interactive)
-  (set-mark-command (beginning-of-line))
-  (end-of-line)
-  )
+  (if (= (point) (point-at-eol))
+      (progn
+        (set-mark-command (end-of-line))
+        (beginning-of-line))
+    (progn
+      (set-mark-command (beginning-of-line))
+      (end-of-line))))
 
 (defun kill-current-buffer ()
   "Kill current buffer."
