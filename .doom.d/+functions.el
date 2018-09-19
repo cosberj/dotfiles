@@ -9,8 +9,13 @@
 (defun new-line-above ()
   "Act like O in vim."
   (interactive)
-  (previous-line)
-  (new-line-down))
+  (if (= (point) (point-min))
+      (progn
+        (newline-and-indent)
+        (previous-line))
+    (progn
+      (previous-line)
+      (new-line-down))))
 
 (defun copy-whole-line ()
   "Copy current line."
@@ -69,3 +74,10 @@
   (interactive)
   (yank)
   (call-interactively 'indent-region))
+
+(defun isearch-from-buffer-start ()
+  "Go to beginning point of the buffer and cast isearch-foward if cancel the action go back to start cast."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (isearch-forward)))

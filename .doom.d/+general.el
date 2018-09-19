@@ -32,8 +32,10 @@
  "C-u" 'doom/backward-kill-to-bol-and-indent
  ;; "<C-backspace>" 'doom/delete-backward-char
  [M-backspace] 'doom/backward-kill-to-bol-and-indent
- ;; "C-S-j" 'scroll-up-command
- ;; "C-S-k" 'scroll-down-command
+ "M-j" 'scroll-up-command
+ "M-k" 'scroll-down-command
+ "M-g" 'goto-line
+ "C-s" 'isearch-from-buffer-start
  )
 
 

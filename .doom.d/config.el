@@ -29,8 +29,10 @@
 (add-to-list 'default-frame-alist '(width . 100))
 (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
 
+;; when use vim keybinds again
+;; (setq display-line-numbers-type 'relative)
 
-;; (add-hook! 'prog-mode-hook (internal-show-cursor nil nil))
+;; still think what I should use
 ;; (setq-hook! 'prog-mode-hook blink-cursor-mode nil)
 (setq-hook! 'after-init-hook blink-cursor-mode nil)
 ;; modes
@@ -38,6 +40,8 @@
   (setq lsp-highlight-symbol-at-point nil)
   (setq lsp-eldoc-render-all nil)
   )
+
+(setq-local fill-column 100)
 
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode-enable)

@@ -89,7 +89,7 @@
 
        :lang
        assembly          ; assembly for fun or debugging
-                                        ;(cc +irony +rtags); C/C++/Obj-C madness
+       (cc +irony +rtags); C/C++/Obj-C madness
                                         ;clojure           ; java with a lisp
                                         ;common-lisp       ; if you've seen one lisp, you've seen them all
                                         ;crystal           ; ruby at the speed of c
@@ -108,7 +108,7 @@
                                         ;julia             ; a better, faster MATLAB
                                         ;latex             ; writing papers in Emacs has never been so fun
                                         ;ledger            ; an accounting system in Emacs
-                                        ;lua               ; one-based indices? one-based indices
+       lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
                                         ;nim               ; python + lisp at the speed of c
                                         ;nix               ; I hereby declare "nix geht mehr!"
