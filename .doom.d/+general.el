@@ -1,10 +1,11 @@
 ;;; ~/tod/.doom.d/+general.el -*- lexical-binding: t; -*-
 ;;; code:
 (load! "+functions")
+
 (general-define-key
  "RET" 'newline-and-indent
- "C-v" 'er/expand-region
- "C-S-v" 'er/contract-region
+ "C-." 'er/expand-region
+ "C-," 'er/contract-region
  "M-s" 'counsel-grep-or-swiper
  "M-S" '+ivy/project-search
  "M-i" 'imenu
@@ -19,7 +20,7 @@
  "C-y" 'yank-and-indent
  "C-M-l" 'select-whole-line
  "M-p" 'project-find-file
- "C-x C-b" 'switch-to-buffer
+ "C-x C-b" 'persp-switch-to-buffer
  "M-U" 'redo
  "M-u" 'undo
  "C-'" '+workspace/switch-to
@@ -30,18 +31,18 @@
  "C-a" 'doom/backward-to-bol-or-indent
  "C-e" 'doom/forward-to-last-non-comment-or-eol
  "C-u" 'doom/backward-kill-to-bol-and-indent
- ;; "<C-backspace>" 'doom/delete-backward-char
+ "<backspace>" 'doom/delete-backward-char
  [M-backspace] 'doom/backward-kill-to-bol-and-indent
  "M-j" 'scroll-up-command
  "M-k" 'scroll-down-command
  "M-g" 'goto-line
  "C-s" 'isearch-from-buffer-start
+ "M-r" 'query-replace-from-buffer-start
+ "M-R" 'query-replace-regexp-from-buffer-start
+ "C-u" 'doom/backward-kill-to-bol-and-indent
  )
 
 
-;; should remember
-;; c-x c-u -> upcase region
-;; c-x c-l -> downcase region
 
 
 (general-define-key
@@ -51,10 +52,10 @@
 (general-define-key
  :prefix "C-x"
  "k" 'kill-current-buffer
- "C-k" 'doom/kill-other-buffers
+ "C-k" 'kill-current-buffer
+ "C-S-k" 'doom/kill-other-buffers
  "f" 'find-file-other-window
- "C-d" '+lookup/definition
- "C-S-d" '+lookup/references
+
  "C-o" 'ace-window)
 
 
@@ -72,7 +73,11 @@
   "i s" 'yas-insert-snippet
   "i y" 'counsel-yank-pop
   "C-j" 'avy-goto-char-2
+  "C-d" '+lookup/definition
+  "d" '+lookup/references
+  "C-b" 'list-buffers
   )
+
 ;; file stuff
 (master-def
   "f y" '+default/yank-buffer-filename
@@ -85,7 +90,8 @@
 (master-def
   "g s" 'magit-status
   "g p" 'magit-push-popup
-  "g c" 'magit-commit)
+  "g c" 'magit-commit
+  "g b" 'magit-blame)
 ;; quiting
 (master-def
   "q r" '+workspace/restart-emacs-then-restore)

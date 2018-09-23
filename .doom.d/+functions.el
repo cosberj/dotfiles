@@ -9,6 +9,7 @@
 (defun new-line-above ()
   "Act like O in vim."
   (interactive)
+  (beginning-of-line)
   (if (= (point) (point-min))
       (progn
         (newline-and-indent)
@@ -81,3 +82,15 @@
   (save-excursion
     (goto-char (point-min))
     (isearch-forward)))
+
+(defun query-replace-from-buffer-start ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (call-interactively #'query-replace)))
+
+(defun query-replace-regexp-from-buffer-start ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (call-interactively #'query-replace-regexp)))

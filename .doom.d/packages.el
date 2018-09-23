@@ -6,5 +6,6 @@
 (package! general)
 (package! embrace)
 (package! iedit)
+(package! creamsody-theme)
 ;; Filestuff
 (package! ranger)
