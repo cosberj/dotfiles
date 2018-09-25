@@ -94,3 +94,16 @@
   (save-excursion
     (goto-char (point-min))
     (call-interactively #'query-replace-regexp)))
+(defun zap-to-char-save (arg char)
+  "Zap to a character, but save instead of kill."
+  (interactive "p\ncZap to char: ")
+  (save-excursion
+    (zap-to-char arg char)
+    (yank)))
+
+(defun zap-up-to-char-save (arg char)
+  "Zap to a character, but save instead of kill."
+  (interactive "p\ncZap to char: ")
+  (save-excursion
+    (zap-up-to-char arg char)
+    (yank)))

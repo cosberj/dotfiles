@@ -156,10 +156,6 @@ noremap  <Down>  <Nop>
 noremap  <Left>  <Nop>
 noremap <Right> <Nop>
 
-"testar
-" escape with double tapping j in insert mode
-inoremap jj <Esc>
-
 " wrap lines visually
 set breakindent           " continue wrapped lines visually indented
 set linebreak             " break at 'breakat' rather than last character
@@ -332,6 +328,8 @@ nnoremap <silent><leader>sa :%sm/
 
 nnoremap <silent><leader>; A;<Esc>
 
+inoremap <c-ç> <Esc>
+inoremap <c-j> <Esc>
 
 let g:peekaboo_window = 'vertical botright 50new'
 

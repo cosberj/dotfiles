@@ -90,7 +90,7 @@
        :lang
        assembly          ; assembly for fun or debugging
        (cc +irony +rtags); C/C++/Obj-C madness
-                                        ;clojure           ; java with a lisp
+       clojure           ; java with a lisp
                                         ;common-lisp       ; if you've seen one lisp, you've seen them all
                                         ;crystal           ; ruby at the speed of c
                                         ;csharp            ; unity, .NET, and mono shenanigans
@@ -164,4 +164,8 @@
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
-       (default +bindings +snippets +evil-commands))
+       (default
+         ;; +bindings
+         +snippets
+         ;; +evil-commands
+         ))

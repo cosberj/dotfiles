@@ -5,21 +5,23 @@
       ;; 'doom-sourcerer-personal
       'kaolin-dark
       kaolin-themes-hl-line-colored t
-      ;; kaolin-themes-underline-wave t
+      kaolin-themes-underline-wave t
       kaolin-themes-italic-comments t
       kaolin-themes-distinct-company-scrollbar t
       kaolin-themes-distinct-fringe t
+      ;; 'creamsody
       doom-themes-padded-modeline nil
       doom-treemacs-use-generic-icons nil
       )
 
-(setq text-scale-mode-step 1.0
-      doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 14 :weight 'medium)
-      doom-font (font-spec :family "IBM Plex Mono" :size 14 :weight 'medium)
-      doom-big-font (font-spec :family "IBM Plex Mono" :size 18 :weight 'light)
-      doom-themes-enable-bold t
-      doom-themes-enable-italic t
-      doom-treemacs-enable-variable-pitch t)
+(setq
+ ;; text-scale-mode-step 1.0
+ doom-variable-pitch-font (font-spec :family "IBM Plex Sans" :size 15 :weight 'medium)
+ doom-font (font-spec :family "IBM Plex Mono" :size 15 :weight 'medium)
+ doom-big-font (font-spec :family "IBM Plex Mono" :size 18 :weight 'light)
+ doom-themes-enable-bold t
+ doom-themes-enable-italic t
+ doom-treemacs-enable-variable-pitch t)
 
 ;; default frame
 (add-to-list 'default-frame-alist '(height . 100))
@@ -31,14 +33,16 @@
 ;; when use vim keybinds again
 ;; (setq display-line-numbers-type 'relative)
 
-;; still think what I should use
-;; (setq-hook! 'prog-mode-hook blink-cursor-mode nil)
-(setq-hook! 'after-init-hook blink-cursor-mode nil)
+;; (setq-default cursor-type 'bar)
+(setq-default cursor-type 'box)
+
+;; (setq-hook! 'after-init-hook blink-cursor-mode nil)
 ;; modes
 (after! lsp-mode
   (setq lsp-highlight-symbol-at-point nil)
   (setq lsp-eldoc-render-all nil)
   )
+
 
 (setq-local fill-column 100)
 
@@ -46,11 +50,16 @@
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
 (delete-selection-mode)
-(load! "+ranger") ;; File manager stuff
+;; (load! "+ranger") ;; File manager stuff
 (load! "+general") ;; File manager stuff
 ;; (load! "+key-chord") ;; Key Chord stuff
 ;;
 
 
-(after! evil-mode
-  (global-set-key (kbd "C-ç") 'evil-escape))
+;; (global-set-key (kbd "C-ç") 'evil-escape)
+;; (global-set-key (kbd "C-g") 'evil-escape)
+;; (global-set-key (kbd "C-a") 'doom/backward-to-bol-or-indent)
+;; (global-set-key (kbd "C-e") 'doom/forward-to-last-non-comment-or-eol)
+;; (global-set-key (kbd "C-s") 'swiper)
+;; (global-set-key (kbd "C-p") 'previous-line)
+;; (global-set-key (kbd "C-n") 'next-line)
