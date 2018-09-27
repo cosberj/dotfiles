@@ -99,7 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # User specific aliases and functions
 export LD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$LD_LIBRARY_PATH
 export EMACS_BIN="$HOME/.emacs.d/bin"
-export PATH="$HOME/.cargo/bin:$EMACS_BIN:$LD_LIBRARY_PATH:$PATH"
+export LEIN_PATH="~/bin"
+export PATH="$HOME/.cargo/bin:$EMACS_BIN:$LD_LIBRARY_PATH:$PATH:$LEIN_PATH"
 alias vim=nvim
 alias vi=nvim
 #alias emacs="emacs -mm"

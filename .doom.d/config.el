@@ -2,17 +2,20 @@
 
 ;; theme
 (setq doom-theme
-      ;; 'doom-sourcerer-personal
-      'kaolin-dark
-      kaolin-themes-hl-line-colored t
-      kaolin-themes-underline-wave t
-      kaolin-themes-italic-comments t
-      kaolin-themes-distinct-company-scrollbar t
-      kaolin-themes-distinct-fringe t
+      ;; 'kaolin-light
+      ;; kaolin-themes-hl-line-colored t
+      ;; kaolin-themes-underline-wave t
+      ;; kaolin-themes-italic-comments t
+      ;; kaolin-themes-distinct-company-scrollbar t
+      ;; kaolin-themes-distinct-fringe t
       ;; 'creamsody
-      doom-themes-padded-modeline nil
-      doom-treemacs-use-generic-icons nil
+      ;; 'doom-nord-light
+      ;; 'eclipse
+      'paper
       )
+
+;; (load-theme 'paper)
+
 
 (setq
  ;; text-scale-mode-step 1.0
@@ -22,6 +25,19 @@
  doom-themes-enable-bold t
  doom-themes-enable-italic t
  doom-treemacs-enable-variable-pitch t)
+
+;; settings for paper-theme looks more nice
+(set-face-background 'show-paren-match "#8C0D40")
+(add-hook 'after-init-hook (lambda () (hl-line-mode -1)))
+
+;; (setq
+;;  ;; text-scale-mode-step 1.0
+;;  doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 15 :weight 'medium)
+;;  doom-font (font-spec :family "Source Code Pro" :size 15 :weight 'medium)
+;;  doom-big-font (font-spec :family "Source Code Pro" :size 18 :weight 'light)
+;;  doom-themes-enable-bold t
+;;  doom-themes-enable-italic t
+;;  doom-treemacs-enable-variable-pitch t)
 
 ;; default frame
 (add-to-list 'default-frame-alist '(height . 100))
@@ -34,7 +50,7 @@
 ;; (setq display-line-numbers-type 'relative)
 
 ;; (setq-default cursor-type 'bar)
-(setq-default cursor-type 'box)
+
 
 ;; (setq-hook! 'after-init-hook blink-cursor-mode nil)
 ;; modes
@@ -53,7 +69,7 @@
 ;; (load! "+ranger") ;; File manager stuff
 (load! "+general") ;; File manager stuff
 ;; (load! "+key-chord") ;; Key Chord stuff
-;;
+(load! "+hydra")
 
 
 ;; (global-set-key (kbd "C-ç") 'evil-escape)

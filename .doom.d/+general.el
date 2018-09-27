@@ -40,7 +40,9 @@
  "M-S" '+ivy/project-search-from-cwd
  "M-r" 'query-replace-from-buffer-start
  "M-R" 'query-replace-regexp-from-buffer-start
- "C-u" 'doom/backward-kill-to-bol-and-indent
+ "C-u" 'doom/delete-backward-char
+ "C-S-u" 'backward-kill-word
+ "C-S-M-u" 'doom/backward-kill-to-bol-and-indent
  "M-f" 'forward-to-word
  "C-M-f" 'forward-word
  "C-M-b" 'backward-to-word
@@ -66,6 +68,7 @@
  "M-8"   (λ! (+workspace/switch-to 7))
  "M-9"   (λ! (+workspace/switch-to 8))
  "M-0" #'+workspace/switch-to-last
+
  )
 
 (general-define-key
@@ -80,7 +83,10 @@
  "f" 'find-file-other-window
  "C-o" 'ace-window
  "b" 'ivy-switch-buffer-other-window
- "C-b" '+ivy/switch-workspace-buffer
+ "C-b" 'ivy-switch-buffer
+ ;; "C-b" '+ivy/switch-workspace-buffer
+ "C-r" 'hydra-rectangle/body
+ "m" 'multiple-cursors-hydra/body
  )
 
 (global-set-key "\M-v" nil)
@@ -137,6 +143,12 @@
 
 (general-def swiper-map
   [backtab] '+ivy/wgrep-occur)
+
+(general-def clojure-mode-map
+  "C-x m e b" 'cider-eval-buffer
+  "C-x m e r" 'cider-eval-region
+  "C-x m e p" 'cider-eval-sexp-at-point
+  )
 
 (general-setq auto-revert-interval 10)
 
