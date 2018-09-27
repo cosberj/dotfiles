@@ -5,10 +5,8 @@
 (package! general)
 (package! embrace)
 (package! iedit)
-(package! creamsody-theme)
-
 (package! paper-theme)
-
-
+(package! creamsody-theme)
+(package! eclipse-theme)
 ;; Filestuff
 (package! ranger)
