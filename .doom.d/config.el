@@ -3,19 +3,36 @@
 ;; theme
 (setq doom-theme 'eclipse)
 
+;; (load-theme 'eclipse)
+
 ;; settings for paper-theme looks more nice
 ;; (set-face-background 'show-paren-match "#8C0D40")
 ;; (set-face-background 'show-paren-match "gray50")
 (add-to-list 'default-frame-alist '(background-color . "white"))
 
-(defun disable-hl-line ()
-  (lambda ()
-    (hl-line-mode -1)
-    (global-hl-line-mode -1)))
-
-(disable-hl-line)
-
 (delete-selection-mode)
+
+;;;###autoload
+(defun my-lisp-hook ()
+  (rainbow-delimiters-mode-disable)
+  (hl-line-mode -1)
+  (lispy-mode 1))
+
+(add-hook 'emacs-lisp-mode-hook 'my-lisp-hook)
+(add-hook 'clojure-mode-hook 'my-lisp-hook)
+
+(setq lispy-no-permanent-semantic t
+      lispy-delete-backward-recenter nil
+      lispy-helm-columns '(70 100)
+      lispy-avy-style-symbol 'at-full)
+
+(require 'spaceline-config)
+;; (spaceline-spacemacs-theme)
+(spaceline-emacs-theme)
+(setq-default frame-title-format "%b (%f)")
+(add-hook 'clojure-mode-hook 'subword-mode)
+
+(require 'visual-regexp-steroids)
 
 (setq
  ;; text-scale-mode-step 1.0
@@ -31,7 +48,7 @@
 (add-to-list 'default-frame-alist '(height . 100))
 
 (add-to-list 'default-frame-alist '(width . 100))
-;; (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 100))
 
 
 (global-subword-mode 1)
@@ -49,10 +66,7 @@
   (setq lsp-eldoc-render-all nil)
   )
 
-
-(setq-local fill-column 100)
-
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode-enable)
+;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'prog-mode-hook #'+format|enable-on-save)
 
 

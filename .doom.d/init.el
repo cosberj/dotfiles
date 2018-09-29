@@ -31,18 +31,18 @@
 
        :ui
        doom              ; what makes DOOM look the way it does
-       doom-dashboard    ; a nifty splash screen for Emacs
-       ( doom-modeline  +new)    ; a snazzy Atom-inspired mode-line
+       ;; doom-dashboard    ; a nifty splash screen for Emacs
+       ;; ( doom-modeline  +new)    ; a snazzy Atom-inspired mode-line
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       evil-goggles      ; display visual hints when editing in evil
+       ;; evil-goggles      ; display visual hints when editing in evil
                                         ;fci               ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE tags
                                         ;modeline          ; snazzy, Atom-inspired modeline, plus API
-       nav-flash         ; blink the current line after jumping
+       ;; nav-flash         ; blink the current line after jumping
                                         ;neotree           ; a project drawer, like NERDTree for vim
-       treemacs          ; a project drawer, like neotree but cooler
+       ;; treemacs          ; a project drawer, like neotree but cooler
        (popup            ; tame sudden yet inevitable temporary windows
-        +all             ; catch all popups that start with an asterix
+        ;; +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
        ;; pretty-code
        ;; ( pretty-code
@@ -50,7 +50,7 @@
                                         ;tabbar            ; FIXME an (incomplete) tab bar for Emacs
                                         ;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
 
        :editor
@@ -59,15 +59,12 @@
                                         ;parinfer          ; turn lisp into python, sort of
        rotate-text ; cycle region at point between text candidates
 
-
-       rotate-text       ; cycle region at point between text candidates
-
        :emacs
        dired             ; making dired pretty [functional]
        ediff             ; comparing files in Emacs
        electric          ; smarter, keyword-based electric-indent
                                         ;eshell            ; a consistent, cross-platform shell (WIP)
-       hideshow          ; basic code-folding support
+       ;; hideshow          ; basic code-folding support
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
@@ -83,7 +80,7 @@
                                         ;pdf               ; pdf enhancements
                                         ;prodigy           ; FIXME managing external services & code builders
                                         ;rgb               ; creating color strings
-       tmux              ; an API for interacting with tmux
+       ;; tmux              ; an API for interacting with tmux
                                         ;upload            ; map local to remote projects via ssh/ftp
                                         ;wakatime
 

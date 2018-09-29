@@ -33,7 +33,6 @@
 
  "C-a" 'doom/backward-to-bol-or-indent
  "C-e" 'doom/forward-to-last-non-comment-or-eol
- "C-u" 'doom/backward-kill-to-bol-and-indent
 
  "M-P" 'backward-paragraph
  "M-N" 'forward-paragraph
@@ -42,9 +41,6 @@
  "M-g" 'goto-line
  "C-M-g" 'avy-goto-line
  ;; scale -> should change to hydra version
- "M-+"   (λ! (text-scale-set 0))
- "M-="   'text-scale-increase
- "M--" 'text-scale-decrease
  "<f2>" 'hydra-zoom/body
 
 
@@ -64,10 +60,16 @@
  "C-," 'er/contract-region
 
  "C-M-l" 'select-whole-line
+ ;; mc mark
+ "C-7" 'mc/mark-previous-like-this
+ "C-8" 'mc/mark-next-like-this
+ ;; mc unmark
+ "C-M-7" 'mc/unmark-previous-like-this
+ "C-M-8" 'mc/unmark-next-like-this
 
  ;; undo/redo
- "M-U" 'redo
- "M-u" 'undo
+ "C-S-u" 'redo
+ "C-u" 'undo
 
  ;; helpers
  "M-l" 'recenter-top-bottom
@@ -77,7 +79,15 @@
  "M-i" 'avy-goto-char
 
  [C-tab] '+company/complete
+ "C-M-i" 'complete-symbol
+
  "C-*" 'iedit-mode
+
+ ;; Search / Replace
+ "C-M-%" 'vr/query-replace
+ "M-%" 'vr/replace
+ "M-$" 'vr/mc-mark
+
  )
 
 ;; should change this for hydra
@@ -86,8 +96,7 @@
   "M-;" 'iedit-toggle-selection
   "M-<" 'iedit-goto-first-occurrence
   "M->" 'iedit-goto-last-occurrence
-  "M-l" 'iedit-restrict-function
-  )
+  "M-l" 'iedit-restrict-function)
 
 (general-define-key
  :prefix "C-x"
@@ -136,7 +145,10 @@
 (general-def swiper-map
   [backtab] '+ivy/wgrep-occur)
 
-(general-setq auto-revert-interval 10)
+(general-def lispy-mode-map
+  "M-f" 'forward-word
+  "C-." 'lispy-mark
+  "C-r" 'lispy-backward)
 
 (general-def company-active-map
   "C-n" 'company-select-next
@@ -147,3 +159,5 @@
   [tab]     #'company-complete-common-or-cycle
   [backtab] #'company-select-previous
   )
+
+(general-setq auto-revert-interval 10)
